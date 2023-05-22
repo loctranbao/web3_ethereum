@@ -57,9 +57,27 @@ describe("Fundme", async () => {
 
         it("fail when withdrawer is not the owner", async () => {
             const accounts = await ethers.getSigners();
-            console.log(accounts[1])
             const otherFundMe = fundMe.connect(accounts[1])
-            await expect(otherFundMe.withdraw()).to.be.revertedWith("FundMe__NotOwner")
+            await expect(otherFundMe.withdraw()).to.be.revertedWithCustomError(otherFundMe, "FundMe__NotOwner")
+        })
+
+        it("transfer fund successful back to owner in case of single funder", async () => {
+            /// provider is a abstraction to ethereum network
+            /// we use them to query balance of any address
+            const startingOwnerBalance = await  fundMe.provider.getBalance(deployer)
+            const startingFund = await fundMe.provider.getBalance(fundMe.address)
+
+            let transactionResponse = await fundMe.withdraw()
+            /// need to wait for confirmation before process
+            /// in transaction receipt we can access to information about gas used, gas fee
+            let transactionReceipt = await transactionResponse.wait()
+
+            const endingOwnerBalance = await  fundMe.provider.getBalance(deployer)
+
+            const transactionFee = transactionReceipt.gasUsed.mul(transactionReceipt.effectiveGasPrice)
+            
+            assert.equal(endingOwnerBalance.toString(), 
+                startingOwnerBalance.add(startingFund).sub(transactionFee).toString())
         })
 
     })
