@@ -1,6 +1,10 @@
-require("@nomicfoundation/hardhat-toolbox");
-require("hardhat-deploy");
-require("dotenv").config()
+// require("@nomicfoundation/hardhat-toolbox");
+// require("hardhat-deploy");
+// require("dotenv").config()
+
+import "@nomicfoundation/hardhat-toolbox"
+import "hardhat-deploy"
+import "dotenv/config"
 
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || ""
 const SEPOLIA_RPC_URL =

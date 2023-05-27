@@ -1,7 +1,10 @@
 /// unit test Fundme on local node
-const {network, deployments, ethers} = require('hardhat');
-const {expect, assert} = require("chai");
-const {developmentChains} = require("../../helper-hardhat-config")
+// const {network, deployments, ethers} = require('hardhat');
+// const {expect, assert} = require("chai");
+// const {developmentChains} = require("../../helper-hardhat-config")
+import {network, deployments, ethers, getNamedAccounts} from "hardhat"
+import {expect, assert} from "chai"
+import {developmentChains} from "../../helper-hardhat-config"
 
 !developmentChains.includes(network.name) 
     ? describe.skip

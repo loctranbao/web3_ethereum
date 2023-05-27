@@ -1,6 +1,9 @@
-const { assert } = require("chai")
-const { network, ethers, getNamedAccounts } = require("hardhat")
-const { developmentChains } = require("../../helper-hardhat-config")
+// const { assert } = require("chai")
+// const { network, ethers, getNamedAccounts } = require("hardhat")
+// const { developmentChains } = require("../../helper-hardhat-config")
+import {assert} from "chai"
+import {network, ethers, getNamedAccounts} from "hardhat"
+import {developmentChains} from "../../helper-hardhat-config"
 
 developmentChains.includes(network.name)
     ? describe.skip

@@ -1,4 +1,5 @@
-const { network } = require("hardhat")
+// const { network } = require("hardhat")
+import {network} from "hardhat"
 
 const DECIMALS = "8"
 const INITIAL_PRICE = "200000000000" // 2000
